@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>88ef2b99-d1a8-430d-80da-59848a294aad</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>ReactiveUI</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Activation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AutoPersistHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)BindingTypeConverters.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CollectionDebugView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CommandBinding.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CompatMixins.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ContractStubs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CreatesCommandBinding.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DisposableMixins.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ExpressionMixins.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ExpressionRewriter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IDependencyResolver.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)INPCObservableForProperty.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Interactions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Interfaces.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IReactiveObject.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IROObservableForProperty.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Legacy\Errors.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Legacy\ReactiveCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LoggingMixins.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MessageBus.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ObservableAsPropertyHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ObservedChangedMixin.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)OrderedComparer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)POCOObservableForProperty.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PropertyBinding.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ReactiveBinding.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ReactiveCollectionMixins.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ReactiveCommand.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)ReactiveList.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ReactiveNotifyPropertyChangedMixin.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ReactiveObject.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RefcountDisposeWrapper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Reflection.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RegisterableInterfaces.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Registrations.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RoutableViewModelMixin.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RoutingState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RxApp.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ScheduledSubject.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SuspensionHost.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UnhandledErrorException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)VariadicTemplates.cs">
+      <DependentUpon>VariadicTemplates.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)ViewAttributes.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewLocator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)WaitForDispatcherScheduler.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)WeakEventManager.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)VariadicTemplates.tt">
+      <LastGenOutput>VariadicTemplates.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+</Project>

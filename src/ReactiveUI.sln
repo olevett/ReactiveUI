@@ -56,7 +56,19 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReactiveUI.Testing_Mac", "R
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Reactive.Testing_Mac", "Microsoft.Reactive.Testing\Microsoft.Reactive.Testing_Mac.csproj", "{AA27F817-FAD2-4622-B68A-651A8AA9E076}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "ReactiveUI.Shared", "ReactiveUI.Shared\ReactiveUI.Shared.shproj", "{88EF2B99-D1A8-430D-80DA-59848A294AAD}"
+EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		ReactiveUI.Shared\ReactiveUI.Shared.projitems*{128799c7-5776-401e-9e15-a9119c3d8318}*SharedItemsImports = 4
+		ReactiveUI.Shared\ReactiveUI.Shared.projitems*{1913bf79-061f-4667-adf9-8e6cda6d1211}*SharedItemsImports = 4
+		ReactiveUI.Shared\ReactiveUI.Shared.projitems*{1ce2d235-8072-4649-ba5a-cfb1af8776e0}*SharedItemsImports = 4
+		ReactiveUI.Shared\ReactiveUI.Shared.projitems*{464cb812-f99f-401b-be4c-e8f0515cd19d}*SharedItemsImports = 4
+		ReactiveUI.Shared\ReactiveUI.Shared.projitems*{689ec7c5-2d81-4124-929e-397b330cc358}*SharedItemsImports = 4
+		ReactiveUI.Shared\ReactiveUI.Shared.projitems*{88ef2b99-d1a8-430d-80da-59848a294aad}*SharedItemsImports = 13
+		ReactiveUI.Shared\ReactiveUI.Shared.projitems*{af913370-a394-4dbd-801e-15e1fda78ffc}*SharedItemsImports = 4
+		ReactiveUI.Shared\ReactiveUI.Shared.projitems*{f5a6e11b-b074-4a0b-b937-267d840e31df}*SharedItemsImports = 4
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Ad-Hoc|Any CPU = Ad-Hoc|Any CPU
 		Ad-Hoc|ARM = Ad-Hoc|ARM

@@ -267,7 +267,7 @@ namespace ReactiveUI
                     // NB: We need to make sure to respect ordering so that the cleanup
                     // happens before we invoke block again
                     viewDisposable.Disposable = Disposable.Empty;
-                    if(activated) {
+                    if (activated) {
                         viewDisposable.Disposable = new CompositeDisposable(block());
                     }
                 }),
@@ -285,8 +285,7 @@ namespace ReactiveUI
                     if (activated) {
                         viewVmDisposable.Disposable = view.WhenAnyValue(x => x.ViewModel)
                             .Select(x => x as ISupportsActivation)
-                            .Subscribe(x =>
-                            {
+                            .Subscribe(x => {
                                 // NB: We need to make sure to respect ordering so that the cleanup
                                 // happens before we activate again
                                 vmDisposable.Disposable = Disposable.Empty;
@@ -308,9 +307,9 @@ namespace ReactiveUI
                 Locator.Current
                        .GetServices<IActivationForViewFetcher>()
                        .Aggregate(Tuple.Create(0, default(IActivationForViewFetcher)), (acc, x) => {
-                            int score = x.GetAffinityForView(t);
-                            return (score > acc.Item1) ? Tuple.Create(score, x) : acc;
-                        }).Item2, RxApp.SmallCacheLimit);
+                           int score = x.GetAffinityForView(t);
+                           return (score > acc.Item1) ? Tuple.Create(score, x) : acc;
+                       }).Item2, RxApp.SmallCacheLimit);
     }
 
     /// <summary>
