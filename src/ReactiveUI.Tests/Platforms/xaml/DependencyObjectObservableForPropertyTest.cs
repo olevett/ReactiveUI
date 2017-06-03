@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using ReactiveUI;
 using Xunit;
+using System.Reactive.Concurrency;
 
 namespace ReactiveUI.Tests
 {
@@ -33,7 +34,7 @@ namespace ReactiveUI.Tests
 
     public class DependencyObjectObservableForPropertyTest
     {
-        [Fact]
+        [WpfFact]
         public void DependencyObjectObservableForPropertySmokeTest()
         {
             var fixture = new DepObjFixture();
@@ -55,7 +56,7 @@ namespace ReactiveUI.Tests
             disp2.Dispose();
         }
 
-        [Fact]
+        [WpfFact]
         public void DerivedDependencyObjectObservableForPropertySmokeTest()
         {
             var fixture = new DerivedDepObjFixture();
@@ -77,7 +78,7 @@ namespace ReactiveUI.Tests
             disp2.Dispose();
         }
 
-        [Fact]
+        [WpfFact]
         public void WhenAnyWithDependencyObjectTest()
         {
             var inputs = new[] {"Foo", "Bar", "Baz"};
@@ -91,7 +92,7 @@ namespace ReactiveUI.Tests
             Assert.True(inputs.Zip(outputs.Skip(1), (expected, actual) => expected == actual).All(x => x));
         }
 
-        [Fact]
+        [WpfFact]
         public void ListBoxSelectedItemTest()
         {
             var input = new ListBox();
@@ -99,7 +100,7 @@ namespace ReactiveUI.Tests
             input.Items.Add("Bar");
             input.Items.Add("Baz");
 
-            var output = input.WhenAnyValue(x => x.SelectedItem).CreateCollection();
+            var output = input.WhenAnyValue(x => x.SelectedItem).CreateCollection(scheduler: ImmediateScheduler.Instance);
             Assert.Equal(1, output.Count);
 
             input.SelectedIndex = 1;

@@ -76,7 +76,7 @@
             resolver.RegisterViewsForViewModels(GetType().Assembly);
         }
 
-        [Fact]
+        [WpfFact]
         public void RegisterViewsForViewModelShouldRegisterAllViews()
         {
             using (resolver.WithResolver()) {
@@ -86,7 +86,7 @@
             }
         }
 
-        [Fact]
+        [WpfFact]
         public void RegisterViewsForViewModelShouldIncludeContracts()
         {
             using (resolver.WithResolver()) {
@@ -94,7 +94,7 @@
             }
         }
 
-        [Fact]
+        [WpfFact]
         public void NonContractRegistrationsShouldResolveCorrectly()
         {
             using (resolver.WithResolver()) {
@@ -102,7 +102,7 @@
             }
         }
 
-        [Fact]
+        [WpfFact]
         public void ContractRegistrationsShouldResolveCorrectly()
         {
             using (resolver.WithResolver()) {
@@ -118,7 +118,7 @@
             }
         }
 
-        [Fact]
+        [WpfFact]
         public void SingleInstanceViewsShouldOnlyBeInstantiatedOnce()
         {
             using (resolver.WithResolver()) {
@@ -134,7 +134,7 @@
             }
         }
 
-        [Fact]
+        [WpfFact]
         public void SingleInstanceViewsWithContractShouldResolveCorrectly()
         {
             using (resolver.WithResolver()) {

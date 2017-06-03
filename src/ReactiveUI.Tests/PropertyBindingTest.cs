@@ -66,7 +66,7 @@ namespace ReactiveUI.Tests
 
     public class PropertyBindingTest
     {
-        [Fact, UseInvariantCulture]
+        [WpfFact, UseInvariantCulture]
         public void TwoWayBindWithFuncConvertersSmokeTest()
         {
             var vm = new PropertyBindViewModel();
@@ -91,7 +91,7 @@ namespace ReactiveUI.Tests
             Assert.Equal("567.89", view.SomeTextBox.Text);
         }
 
-        [Fact]
+        [WpfFact]
         public void TwoWayBindSmokeTest()
         {
             var vm = new PropertyBindViewModel();
@@ -116,7 +116,7 @@ namespace ReactiveUI.Tests
             Assert.NotEqual(vm.Property1, view.SomeTextBox.Text);
         }
 
-        [Fact]
+        [WpfFact]
         public void TypeConvertedTwoWayBindSmokeTest()
         {
             var vm = new PropertyBindViewModel();
@@ -179,7 +179,7 @@ namespace ReactiveUI.Tests
             Assert.Equal(13, vm.JustAInt32);
         }
 
-        [Fact]
+        [WpfFact]
         public void BindingIntoModelObjects()
         {
             var vm = new PropertyBindViewModel();
@@ -189,7 +189,7 @@ namespace ReactiveUI.Tests
             Assert.Equal("Baz", view.SomeTextBox.Text);
         }
 
-        [Fact]
+        [WpfFact]
         public void ViewModelNullableToViewNonNullable()
         {
             var vm = new PropertyBindViewModel();
@@ -208,7 +208,7 @@ namespace ReactiveUI.Tests
             Assert.Equal(0.0, view.FakeControl.JustADouble);
         }
 
-        [Fact]
+        [WpfFact]
         public void ViewModelNonNullableToViewNullable()
         {
             var vm = new PropertyBindViewModel();
@@ -227,7 +227,7 @@ namespace ReactiveUI.Tests
             Assert.Equal(0.0, vm.JustADouble);
         }
 
-        [Fact]
+        [WpfFact]
         public void ViewModelNullableToViewNullable()
         {
             var vm = new PropertyBindViewModel();
@@ -246,7 +246,7 @@ namespace ReactiveUI.Tests
             Assert.Equal(0.0, vm.NullableDouble);
         }
 
-        [Fact]
+        [WpfFact]
         public void ViewModelIndexerToView()
         {
             var vm = new PropertyBindViewModel();
@@ -256,7 +256,7 @@ namespace ReactiveUI.Tests
             Assert.Equal("Foo", view.SomeTextBox.Text);
         }
 
-        [Fact]
+        [WpfFact]
         public void ViewModelIndexerToViewChanges()
         {
             var vm = new PropertyBindViewModel();
@@ -270,7 +270,7 @@ namespace ReactiveUI.Tests
             Assert.Equal("Bar", view.SomeTextBox.Text);
         }
 
-        [Fact]
+        [WpfFact]
         public void ViewModelIndexerPropertyToView()
         {
             var vm = new PropertyBindViewModel();
@@ -280,7 +280,7 @@ namespace ReactiveUI.Tests
             Assert.Equal("3", view.SomeTextBox.Text);
         }
 
-        [Fact]
+        [WpfFact]
         public void BindToShouldntInitiallySetToNull()
         {
             var vm = new PropertyBindViewModel();
@@ -293,7 +293,7 @@ namespace ReactiveUI.Tests
             Assert.Equal(vm.Model.AnotherThing, view.FakeControl.NullHatingString);
         }
 
-        [Fact]
+        [WpfFact]
         public void BindToTypeConversionSmokeTest()
         {
             var vm = new PropertyBindViewModel();
@@ -308,7 +308,7 @@ namespace ReactiveUI.Tests
             Assert.Equal(vm.JustADouble.ToString(), view.FakeControl.NullHatingString);
         }
 
-        [Fact]
+        [WpfFact]
         public void BindToNullShouldThrowHelpfulError() {
             var view = new PropertyBindView() {ViewModel = null};
 
@@ -319,7 +319,7 @@ namespace ReactiveUI.Tests
         }
 
 #if !MONO
-        [Fact]
+        [WpfFact]
         public void TwoWayBindToSelectedItemOfItemsControl()
         {
         	var vm = new PropertyBindViewModel();
@@ -338,7 +338,7 @@ namespace ReactiveUI.Tests
         	Assert.Equal("bbb", view.FakeItemsControl.SelectedItem);
         }
 
-        [Fact]
+        [WpfFact]
         public void ItemsControlShouldGetADataTemplate()
         {
             var vm = new PropertyBindViewModel();
@@ -350,7 +350,7 @@ namespace ReactiveUI.Tests
             Assert.NotNull(view.FakeItemsControl.ItemTemplate);
         }
 
-        [Fact]
+        [WpfFact]
         public void ItemsControlWithDisplayMemberPathSetShouldNotGetADataTemplate()
         {
             var vm = new PropertyBindViewModel();
@@ -363,7 +363,7 @@ namespace ReactiveUI.Tests
             Assert.Null(view.FakeItemsControl.ItemTemplate);
         }
 
-        [Fact]
+        [WpfFact]
         public void ItemsControlShouldGetADataTemplateInBindTo()
         {
             var vm = new PropertyBindViewModel();
@@ -379,7 +379,7 @@ namespace ReactiveUI.Tests
                 .BindTo(vm, x => x.Property1);
         }
 
-        [Fact]
+        [WpfFact]
         public void BindingToItemsControl()
         {
             var vm = new PropertyBindViewModel();
@@ -390,7 +390,7 @@ namespace ReactiveUI.Tests
         }
 #endif
 
-        [Fact]
+        [WpfFact]
         public void BindExpectsConverterFuncsToNotBeNull()
         {
             var vm = new PropertyBindViewModel();
@@ -403,7 +403,7 @@ namespace ReactiveUI.Tests
             Assert.Throws<ArgumentNullException>(() => fixture.Bind(vm, view, x => x.Property1, x => x.SomeTextBox.Text, (IObservable<Unit>)null, s => s, nullFunc));
         }
 
-        [Fact]
+        [WpfFact]
         public void BindWithFuncShouldWorkAsExtensionMethodSmokeTest()
         {
             var vm = new PropertyBindViewModel();
