@@ -2,8 +2,10 @@
 using System.Linq.Expressions;
 using System.Reactive.Disposables;
 using System.Windows.Forms;
-using Xunit;
+using Microsoft.Reactive.Testing;
+using ReactiveUI.Testing;
 using ReactiveUI.Winforms;
+using Xunit;
 
 namespace ReactiveUI.Tests.Winforms
 {
@@ -12,24 +14,26 @@ namespace ReactiveUI.Tests.Winforms
         [Fact]
         public void WinformsCreatesObservableForPropertyWorksForTextboxes()
         {
-            var input = new TextBox();
-            var fixture = new WinformsCreatesObservableForProperty();
+            new TestScheduler().With(_ => {
+                var input = new TextBox();
+                var fixture = new WinformsCreatesObservableForProperty();
 
-            Assert.NotEqual(0, fixture.GetAffinityForObject(typeof(TextBox), "Text"));
+                Assert.NotEqual(0, fixture.GetAffinityForObject(typeof(TextBox), "Text"));
 
-            Expression<Func<TextBox, string>> expression = x => x.Text;
-            var output = fixture.GetNotificationForProperty(input, expression.Body).CreateCollection();
-            Assert.Equal(0, output.Count);
+                Expression<Func<TextBox, string>> expression = x => x.Text;
+                var output = fixture.GetNotificationForProperty(input, expression.Body).CreateCollection();
+                Assert.Equal(0, output.Count);
 
-            input.Text = "Foo";
-            Assert.Equal(1, output.Count);
-            Assert.Equal(input, output[0].Sender);
-            Assert.Equal("Text", output[0].GetPropertyName());
+                input.Text = "Foo";
+                Assert.Equal(1, output.Count);
+                Assert.Equal(input, output[0].Sender);
+                Assert.Equal("Text", output[0].GetPropertyName());
 
-            output.Dispose();
+                output.Dispose();
 
-            input.Text = "Bar";
-            Assert.Equal(1, output.Count);
+                input.Text = "Bar";
+                Assert.Equal(1, output.Count);
+            });
         }
 
         [Fact]
