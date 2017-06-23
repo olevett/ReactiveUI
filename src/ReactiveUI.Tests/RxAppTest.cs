@@ -9,7 +9,7 @@ namespace ReactiveUI.Tests
     public class RxAppTest
     {
 #if !MONO
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void DepPropNotifierShouldBeFound()
         {
             RxApp.EnsureInitialized();
