@@ -1,20 +1,16 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Reactive.Subjects;
 using Microsoft.Reactive.Testing;
 using ReactiveUI.Testing;
 using Xunit;
-using System.Reactive.Subjects;
 
 namespace ReactiveUI.Tests
 {
     public class AutoPersistHelperTest
     {
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void AutoPersistDoesntWorkOnNonDataContractClasses()
         {
             var fixture = new HostTestFixture();
@@ -29,7 +25,7 @@ namespace ReactiveUI.Tests
             Assert.False(shouldDie);
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void AutoPersistHelperShouldntTriggerOnNonPersistableProperties()
         {
             (new TestScheduler()).With(sched => {
@@ -50,7 +46,7 @@ namespace ReactiveUI.Tests
             });
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void AutoPersistHelperSavesOnInterval()
         {
             (new TestScheduler()).With(sched => {
@@ -83,7 +79,7 @@ namespace ReactiveUI.Tests
             });
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void AutoPersistHelperDisconnects()
         {
             (new TestScheduler()).With(sched => {
@@ -119,7 +115,7 @@ namespace ReactiveUI.Tests
 
     public class AutoPersistCollectionTests
     {
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void AutoPersistCollectionSmokeTest()
         {
             (new TestScheduler()).With(sched => {
@@ -171,7 +167,7 @@ namespace ReactiveUI.Tests
             });
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void AutoPersistCollectionDisconnectsOnDispose()
         {
             (new TestScheduler()).With(sched => {
