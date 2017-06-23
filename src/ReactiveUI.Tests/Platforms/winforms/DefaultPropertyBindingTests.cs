@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Linq.Expressions;
+using System.Reactive.Concurrency;
 using System.Reactive.Disposables;
 using System.Windows.Forms;
-using Microsoft.Reactive.Testing;
-using ReactiveUI.Testing;
 using ReactiveUI.Winforms;
 using Xunit;
 
@@ -11,32 +10,30 @@ namespace ReactiveUI.Tests.Winforms
 {
     public class DefaultPropertyBindingTests
     {
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
         public void WinformsCreatesObservableForPropertyWorksForTextboxes()
         {
-            new TestScheduler().With(_ => {
-                var input = new TextBox();
-                var fixture = new WinformsCreatesObservableForProperty();
+            var input = new TextBox();
+            var fixture = new WinformsCreatesObservableForProperty();
 
-                Assert.NotEqual(0, fixture.GetAffinityForObject(typeof(TextBox), "Text"));
+            Assert.NotEqual(0, fixture.GetAffinityForObject(typeof(TextBox), "Text"));
 
-                Expression<Func<TextBox, string>> expression = x => x.Text;
-                var output = fixture.GetNotificationForProperty(input, expression.Body).CreateCollection();
-                Assert.Equal(0, output.Count);
+            Expression<Func<TextBox, string>> expression = x => x.Text;
+            var output = fixture.GetNotificationForProperty(input, expression.Body).CreateCollection(scheduler: ImmediateScheduler.Instance);
+            Assert.Equal(0, output.Count);
 
-                input.Text = "Foo";
-                Assert.Equal(1, output.Count);
-                Assert.Equal(input, output[0].Sender);
-                Assert.Equal("Text", output[0].GetPropertyName());
+            input.Text = "Foo";
+            Assert.Equal(1, output.Count);
+            Assert.Equal(input, output[0].Sender);
+            Assert.Equal("Text", output[0].GetPropertyName());
 
-                output.Dispose();
+            output.Dispose();
 
-                input.Text = "Bar";
-                Assert.Equal(1, output.Count);
-            });
+            input.Text = "Bar";
+            Assert.Equal(1, output.Count);
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
         public void WinformsCreatesObservableForPropertyWorksForComponents()
         {
             var input = new ToolStripButton(); // ToolStripButton is a Component, not a Control
@@ -45,7 +42,7 @@ namespace ReactiveUI.Tests.Winforms
             Assert.NotEqual(0, fixture.GetAffinityForObject(typeof(ToolStripButton), "Checked"));
 
             Expression<Func<ToolStripButton, bool>> expression = x => x.Checked;
-            var output = fixture.GetNotificationForProperty(input, expression.Body).CreateCollection();
+            var output = fixture.GetNotificationForProperty(input, expression.Body).CreateCollection(scheduler: ImmediateScheduler.Instance);
             Assert.Equal(0, output.Count);
 
             input.Checked = true;
@@ -60,7 +57,7 @@ namespace ReactiveUI.Tests.Winforms
             Assert.Equal(1, output.Count);
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
         public void WinformsCreatesObservableForPropertyWorksForThirdPartyControls()
         {
             var input = new AThirdPartyNamespace.ThirdPartyControl();
@@ -69,7 +66,7 @@ namespace ReactiveUI.Tests.Winforms
             Assert.NotEqual(0, fixture.GetAffinityForObject(typeof(AThirdPartyNamespace.ThirdPartyControl), "Value"));
 
             Expression<Func<AThirdPartyNamespace.ThirdPartyControl, string>> expression = x => x.Value;
-            var output = fixture.GetNotificationForProperty(input, expression.Body).CreateCollection();
+            var output = fixture.GetNotificationForProperty(input, expression.Body).CreateCollection(scheduler: ImmediateScheduler.Instance);
             Assert.Equal(0, output.Count);
 
             input.Value = "Foo";
@@ -83,18 +80,18 @@ namespace ReactiveUI.Tests.Winforms
             Assert.Equal(1, output.Count);
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
         public void CanBindViewModelToWinformControls()
         {
             var vm = new FakeWinformViewModel();
-            var view = new FakeWinformsView(){ViewModel = vm};
+            var view = new FakeWinformsView() { ViewModel = vm };
 
             vm.SomeText = "Foo";
             Assert.NotEqual(vm.SomeText, view.Property3.Text);
 
             var disp = view.Bind(vm, x => x.SomeText, x => x.Property3.Text);
             vm.SomeText = "Bar";
-            Assert.Equal(vm.SomeText,view.Property3.Text);
+            Assert.Equal(vm.SomeText, view.Property3.Text);
 
             view.Property3.Text = "Bar2";
             Assert.Equal(vm.SomeText, view.Property3.Text);
@@ -105,7 +102,7 @@ namespace ReactiveUI.Tests.Winforms
             Assert.Equal(vm.SomeDouble.ToString(), view.Property3.Text);
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
         public void SmokeTestWinformControls()
         {
             var vm = new FakeWinformViewModel();
@@ -142,7 +139,8 @@ namespace ReactiveUI.Tests.Winforms
 
     public class FakeWinformViewModel : ReactiveObject, IRoutableViewModel
     {
-        public string UrlPathSegment {
+        public string UrlPathSegment
+        {
             get { return "fake"; }
         }
 
@@ -154,49 +152,57 @@ namespace ReactiveUI.Tests.Winforms
         }
 
         int someInteger;
-        public int SomeInteger {
+        public int SomeInteger
+        {
             get { return this.someInteger; }
             set { this.RaiseAndSetIfChanged(ref this.someInteger, value); }
         }
 
         string someText;
-        public string SomeText {
+        public string SomeText
+        {
             get { return this.someText; }
             set { this.RaiseAndSetIfChanged(ref this.someText, value); }
         }
 
         double someDouble;
-        public double SomeDouble {
+        public double SomeDouble
+        {
             get { return this.someDouble; }
             set { this.RaiseAndSetIfChanged(ref this.someDouble, value); }
         }
 
         string _property1;
-        public string Property1 {
+        public string Property1
+        {
             get { return _property1; }
             set { this.RaiseAndSetIfChanged(ref _property1, value); }
         }
 
         string _property2;
-        public string Property2 {
+        public string Property2
+        {
             get { return _property2; }
             set { this.RaiseAndSetIfChanged(ref _property2, value); }
         }
 
         string _property3;
-        public string Property3 {
+        public string Property3
+        {
             get { return _property3; }
             set { this.RaiseAndSetIfChanged(ref _property3, value); }
         }
 
         string _property4;
-        public string Property4 {
+        public string Property4
+        {
             get { return _property4; }
             set { this.RaiseAndSetIfChanged(ref _property4, value); }
         }
 
         bool _someBooleanProperty;
-        public bool BooleanProperty {
+        public bool BooleanProperty
+        {
             get { return _someBooleanProperty; }
             set { this.RaiseAndSetIfChanged(ref _someBooleanProperty, value); }
         }
@@ -204,7 +210,8 @@ namespace ReactiveUI.Tests.Winforms
 
     public class FakeWinformsView : Control, IViewFor<FakeWinformViewModel>
     {
-        object IViewFor.ViewModel {
+        object IViewFor.ViewModel
+        {
             get { return ViewModel; }
             set { ViewModel = (FakeWinformViewModel)value; }
         }
@@ -221,7 +228,7 @@ namespace ReactiveUI.Tests.Winforms
 
         public FakeWinformsView()
         {
-            this.Property1= new System.Windows.Forms.Button();
+            this.Property1 = new System.Windows.Forms.Button();
             this.Property2 = new Label();
             this.Property3 = new TextBox();
             this.Property4 = new RichTextBox();
@@ -237,9 +244,11 @@ namespace AThirdPartyNamespace
     {
         string value;
 
-        public string Value {
+        public string Value
+        {
             get { return this.value; }
-            set {
+            set
+            {
                 if (this.value != value) {
                     this.value = value;
                     this.OnValueChanged();

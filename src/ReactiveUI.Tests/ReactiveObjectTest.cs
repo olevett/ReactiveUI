@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
+using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 using System.Runtime.Serialization;
 using Xunit;
@@ -14,7 +14,8 @@ namespace ReactiveUI.Tests
         [IgnoreDataMember]
         string _IsNotNullString;
         [DataMember]
-        public string IsNotNullString {
+        public string IsNotNullString
+        {
             get { return _IsNotNullString; }
             set { this.RaiseAndSetIfChanged(ref _IsNotNullString, value); }
         }
@@ -22,7 +23,8 @@ namespace ReactiveUI.Tests
         [IgnoreDataMember]
         string _IsOnlyOneWord;
         [DataMember]
-        public string IsOnlyOneWord {
+        public string IsOnlyOneWord
+        {
             get { return _IsOnlyOneWord; }
             set { this.RaiseAndSetIfChanged(ref _IsOnlyOneWord, value); }
         }
@@ -30,7 +32,8 @@ namespace ReactiveUI.Tests
         [IgnoreDataMember]
         List<string> _StackOverflowTrigger;
         [DataMember]
-        public List<string> StackOverflowTrigger {
+        public List<string> StackOverflowTrigger
+        {
             get { return _StackOverflowTrigger; }
             set { this.RaiseAndSetIfChanged(ref _StackOverflowTrigger, value.ToList()); }
         }
@@ -38,7 +41,8 @@ namespace ReactiveUI.Tests
         [IgnoreDataMember]
         string _UsesExprRaiseSet;
         [DataMember]
-        public string UsesExprRaiseSet {
+        public string UsesExprRaiseSet
+        {
             get { return _UsesExprRaiseSet; }
             set { this.RaiseAndSetIfChanged(ref _UsesExprRaiseSet, value); }
         }
@@ -46,7 +50,8 @@ namespace ReactiveUI.Tests
         [IgnoreDataMember]
         string _PocoProperty;
         [DataMember]
-        public string PocoProperty {
+        public string PocoProperty
+        {
             get { return _PocoProperty; }
             set { _PocoProperty = value; }
         }
@@ -55,7 +60,8 @@ namespace ReactiveUI.Tests
         public ReactiveList<int> TestCollection { get; protected set; }
 
         string _NotSerialized;
-        public string NotSerialized {
+        public string NotSerialized
+        {
             get { return _NotSerialized; }
             set { this.RaiseAndSetIfChanged(ref _NotSerialized, value); }
         }
@@ -72,7 +78,7 @@ namespace ReactiveUI.Tests
 
         public TestFixture()
         {
-            TestCollection = new ReactiveList<int>() {ChangeTrackingEnabled = true};
+            TestCollection = new ReactiveList<int>() { ChangeTrackingEnabled = true };
         }
     }
 
@@ -81,7 +87,8 @@ namespace ReactiveUI.Tests
         [IgnoreDataMember]
         ObservableAsPropertyHelper<string> _FirstThreeLettersOfOneWord;
         [IgnoreDataMember]
-        public string FirstThreeLettersOfOneWord {
+        public string FirstThreeLettersOfOneWord
+        {
             get { return _FirstThreeLettersOfOneWord.Value; }
         }
 
@@ -95,7 +102,7 @@ namespace ReactiveUI.Tests
 
     public class ReactiveObjectTest
     {
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]        
+        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
         public void ReactiveObjectSmokeTest()
         {
             var output_changing = new List<string>();
@@ -119,7 +126,7 @@ namespace ReactiveUI.Tests
             results.AssertAreEqual(output);
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
         public void ReactiveObjectShouldntSerializeAnythingExtra()
         {
             var fixture = new TestFixture() { IsNotNullString = "Foo", IsOnlyOneWord = "Baz" };
@@ -132,7 +139,7 @@ namespace ReactiveUI.Tests
             Assert.True(json.Count(x => x == '"') == 18);
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
         public void RaiseAndSetUsingExpression()
         {
             var fixture = new TestFixture() { IsNotNullString = "Foo", IsOnlyOneWord = "Baz" };
@@ -148,7 +155,7 @@ namespace ReactiveUI.Tests
         }
 
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
         public void ObservableForPropertyUsingExpression()
         {
             var fixture = new TestFixture() { IsNotNullString = "Foo", IsOnlyOneWord = "Baz" };
@@ -174,12 +181,12 @@ namespace ReactiveUI.Tests
             Assert.Equal("Baz", output[1].Value);
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
         public void ChangingShouldAlwaysArriveBeforeChanged()
         {
             string before_set = "Foo";
-            string after_set = "Bar"; 
-            
+            string after_set = "Bar";
+
             var fixture = new TestFixture() { IsOnlyOneWord = before_set };
 
             bool before_fired = false;
@@ -206,23 +213,23 @@ namespace ReactiveUI.Tests
             Assert.True(after_fired);
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
         public void ExceptionsThrownInSubscribersShouldMarshalToThrownExceptions()
         {
             var fixture = new TestFixture() { IsOnlyOneWord = "Foo" };
 
             fixture.Changed.Subscribe(x => { throw new Exception("Die!"); });
-            var exceptionList = fixture.ThrownExceptions.CreateCollection();
+            var exceptionList = fixture.ThrownExceptions.CreateCollection(scheduler: ImmediateScheduler.Instance);
 
             fixture.IsOnlyOneWord = "Bar";
             Assert.Equal(1, exceptionList.Count);
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
         public void DeferringNotificationsDontShowUpUntilUndeferred()
         {
             var fixture = new TestFixture();
-            var output = fixture.Changed.CreateCollection();
+            var output = fixture.Changed.CreateCollection(scheduler: ImmediateScheduler.Instance);
 
             Assert.Equal(0, output.Count);
             fixture.NullableInt = 4;

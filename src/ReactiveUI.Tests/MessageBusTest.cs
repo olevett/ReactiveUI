@@ -1,30 +1,31 @@
-using Microsoft.Reactive.Testing;
-using ReactiveUI.Testing;
 using System;
+using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Reactive.Testing;
+using ReactiveUI.Testing;
 using Xunit;
 
 namespace ReactiveUI.Tests
 {
     public class MessageBusTest
     {
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
         public void MessageBusSmokeTest()
         {
-            var input = new[] {1, 2, 3, 4};
+            var input = new[] { 1, 2, 3, 4 };
 
             var result = (new TestScheduler()).With(sched => {
                 var source = new Subject<int>();
                 var fixture = new MessageBus();
 
                 fixture.RegisterMessageSource(source, "Test");
-                Assert.False(fixture.IsRegistered(typeof (int)));
-                Assert.False(fixture.IsRegistered(typeof (int), "Foo"));
+                Assert.False(fixture.IsRegistered(typeof(int)));
+                Assert.False(fixture.IsRegistered(typeof(int), "Foo"));
 
-                var output = fixture.Listen<int>("Test").CreateCollection();
+                var output = fixture.Listen<int>("Test").CreateCollection(scheduler: ImmediateScheduler.Instance);
 
                 input.Run(source.OnNext);
 
@@ -36,20 +37,20 @@ namespace ReactiveUI.Tests
         }
 
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
-        public void ExplicitSendMessageShouldWorkEvenAfterRegisteringSource() 
+        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        public void ExplicitSendMessageShouldWorkEvenAfterRegisteringSource()
         {
             var fixture = new MessageBus();
             fixture.RegisterMessageSource(Observable<int>.Never);
-         
+
             bool messageReceived = false;
             fixture.Listen<int>().Subscribe(_ => messageReceived = true);
-         
+
             fixture.SendMessage(42);
             Assert.True(messageReceived);
         }
-     
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+
+        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
         public void ListeningBeforeRegisteringASourceShouldWork()
         {
             var fixture = new MessageBus();
@@ -64,7 +65,7 @@ namespace ReactiveUI.Tests
             Assert.Equal(42, result);
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
         public void GCShouldNotKillMessageService()
         {
             var bus = new MessageBus();
@@ -82,7 +83,7 @@ namespace ReactiveUI.Tests
             Assert.True(recieved_message);
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
         public void RegisteringSecondMessageSourceShouldMergeBothSources()
         {
             var bus = new MessageBus();
@@ -109,7 +110,7 @@ namespace ReactiveUI.Tests
             Assert.True(recieved_message2);
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
         public async Task MessageBusThreadingTest()
         {
             var mb = new MessageBus();

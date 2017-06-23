@@ -29,7 +29,7 @@ namespace ReactiveUI.Tests
             var activation = new ActivationForViewFetcher();
 
             var obs = activation.GetActivationForView(uc);
-            var activated = obs.CreateCollection();
+            var activated = obs.CreateCollection(scheduler: ImmediateScheduler.Instance);
 
             RoutedEventArgs loaded = new RoutedEventArgs();
             loaded.RoutedEvent = FrameworkElement.LoadedEvent;
@@ -54,7 +54,7 @@ namespace ReactiveUI.Tests
             var activation = new ActivationForViewFetcher();
 
             var obs = activation.GetActivationForView(uc);
-            var activated = obs.CreateCollection();
+            var activated = obs.CreateCollection(scheduler: ImmediateScheduler.Instance);
 
             RoutedEventArgs loaded = new RoutedEventArgs();
             loaded.RoutedEvent = FrameworkElement.LoadedEvent;
@@ -84,7 +84,7 @@ namespace ReactiveUI.Tests
             var activation = new ActivationForViewFetcher();
 
             var obs = activation.GetActivationForView(uc);
-            var activated = obs.CreateCollection();
+            var activated = obs.CreateCollection(scheduler: ImmediateScheduler.Instance);
 
             RoutedEventArgs loaded = new RoutedEventArgs();
             loaded.RoutedEvent = FrameworkElement.LoadedEvent;

@@ -118,7 +118,7 @@ namespace ReactiveUI.Tests
         {
             (new TestScheduler()).With(sched => {
                 var fixture = new TestFixture();
-                var changes = fixture.ObservableForProperty(x => x.IsOnlyOneWord).CreateCollection();
+                var changes = fixture.ObservableForProperty(x => x.IsOnlyOneWord).CreateCollection(scheduler: ImmediateScheduler.Instance);
 
                 fixture.IsOnlyOneWord = "Foo";
                 sched.Start();
@@ -147,7 +147,7 @@ namespace ReactiveUI.Tests
         {
             (new TestScheduler()).With(sched => {
                 var fixture = new HostTestFixture() {Child = new TestFixture()};
-                var changes = fixture.ObservableForProperty(x => x.Child.IsOnlyOneWord).CreateCollection();
+                var changes = fixture.ObservableForProperty(x => x.Child.IsOnlyOneWord).CreateCollection(scheduler: ImmediateScheduler.Instance);
 
                 fixture.Child.IsOnlyOneWord = "Foo";
                 sched.Start();
@@ -176,7 +176,7 @@ namespace ReactiveUI.Tests
         {
             (new TestScheduler()).With(sched => {
                 var fixture = new HostTestFixture() {Child = new TestFixture()};
-                var changes = fixture.ObservableForProperty(x => x.Child.IsOnlyOneWord).CreateCollection();
+                var changes = fixture.ObservableForProperty(x => x.Child.IsOnlyOneWord).CreateCollection(scheduler: ImmediateScheduler.Instance);
 
                 fixture.Child.IsOnlyOneWord = "Foo";
                 sched.Start();
@@ -217,7 +217,7 @@ namespace ReactiveUI.Tests
         {
             (new TestScheduler()).With(sched => {
                 var fixture = new HostTestFixture() {Child = new TestFixture()};
-                var changes = fixture.ObservableForProperty(x => x.Child.IsOnlyOneWord).CreateCollection();
+                var changes = fixture.ObservableForProperty(x => x.Child.IsOnlyOneWord).CreateCollection(scheduler: ImmediateScheduler.Instance);
 
                 fixture.Child.IsOnlyOneWord = "Foo";
                 sched.Start();
@@ -249,7 +249,7 @@ namespace ReactiveUI.Tests
         {
             (new TestScheduler()).With(sched => {
                 var fixture = new HostTestFixture() {Child = new TestFixture()};
-                var changes = fixture.ObservableForProperty(x => x.Child.IsOnlyOneWord).CreateCollection();
+                var changes = fixture.ObservableForProperty(x => x.Child.IsOnlyOneWord).CreateCollection(scheduler: ImmediateScheduler.Instance);
 
                 fixture.Child.IsOnlyOneWord = "Foo";
                 sched.Start();
@@ -271,7 +271,7 @@ namespace ReactiveUI.Tests
             (new TestScheduler()).With(sched => {
                 var fixture = new NonReactiveINPCObject() { InpcProperty = null };
 
-                var changes = fixture.ObservableForProperty(x => x.InpcProperty.IsOnlyOneWord).CreateCollection();
+                var changes = fixture.ObservableForProperty(x => x.InpcProperty.IsOnlyOneWord).CreateCollection(scheduler: ImmediateScheduler.Instance);
 
                 fixture.InpcProperty = new TestFixture();
                 sched.Start();
@@ -505,7 +505,7 @@ namespace ReactiveUI.Tests
         {
             (new TestScheduler()).With(sched => {
                 var fixture = new TestFixture();
-                var changes = fixture.ObservableForProperty<TestFixture, string>(x => x.IsOnlyOneWord).CreateCollection();
+                var changes = fixture.ObservableForProperty<TestFixture, string>(x => x.IsOnlyOneWord).CreateCollection(scheduler: ImmediateScheduler.Instance);
 
                 fixture.IsOnlyOneWord = "Foo";
                 sched.Start();
@@ -534,7 +534,7 @@ namespace ReactiveUI.Tests
         {
             (new TestScheduler()).With(sched => {
                 var fixture = new TestFixture() { IsOnlyOneWord = "Pre" };
-                var changes = fixture.ObservableForProperty<TestFixture, string>(x => x.IsOnlyOneWord, skipInitial: false).CreateCollection();
+                var changes = fixture.ObservableForProperty<TestFixture, string>(x => x.IsOnlyOneWord, skipInitial: false).CreateCollection(scheduler: ImmediateScheduler.Instance);
 
                 sched.Start();
                 Assert.Equal(1, changes.Count);
@@ -554,7 +554,7 @@ namespace ReactiveUI.Tests
         {
             (new TestScheduler()).With(sched => {
                 var fixture = new TestFixture() { IsOnlyOneWord = "Pre" };
-                var changes = fixture.ObservableForProperty<TestFixture, string>(x => x.IsOnlyOneWord, beforeChange: true).CreateCollection();
+                var changes = fixture.ObservableForProperty<TestFixture, string>(x => x.IsOnlyOneWord, beforeChange: true).CreateCollection(scheduler: ImmediateScheduler.Instance);
 
                 sched.Start();
                 Assert.Equal(0, changes.Count);
@@ -578,7 +578,7 @@ namespace ReactiveUI.Tests
         {
             (new TestScheduler()).With(sched => {
                 var fixture = new TestFixture();
-                var changes = fixture.ObservableForProperty<TestFixture, string>(x => x.IsOnlyOneWord).CreateCollection();
+                var changes = fixture.ObservableForProperty<TestFixture, string>(x => x.IsOnlyOneWord).CreateCollection(scheduler: ImmediateScheduler.Instance);
 
                 fixture.IsOnlyOneWord = "Foo";
                 sched.Start();
@@ -660,7 +660,7 @@ namespace ReactiveUI.Tests
         public void WhenAnyObservableWithNullObjectShouldUpdateWhenObjectIsntNullAnymore()
         {
             var fixture = new TestWhenAnyObsViewModel();
-            var output = fixture.WhenAnyObservable(x => x.MyListOfInts.CountChanged).CreateCollection();
+            var output = fixture.WhenAnyObservable(x => x.MyListOfInts.CountChanged).CreateCollection(scheduler: ImmediateScheduler.Instance);
 
             Assert.Equal(0, output.Count);
 

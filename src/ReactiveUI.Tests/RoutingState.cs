@@ -5,17 +5,20 @@ using Xunit;
 
 namespace ReactiveUI.Routing.Tests
 {
+    using System.Reactive.Concurrency;
     using System.Threading.Tasks;
     using Microsoft.Reactive.Testing;
     public class TestViewModel : ReactiveObject, IRoutableViewModel
     {
         string _SomeProp;
-        public string SomeProp {
+        public string SomeProp
+        {
             get { return _SomeProp; }
             set { this.RaiseAndSetIfChanged(ref _SomeProp, value); }
         }
 
-        public string UrlPathSegment {
+        public string UrlPathSegment
+        {
             get { return "Test"; }
         }
 
@@ -28,7 +31,8 @@ namespace ReactiveUI.Routing.Tests
     public class TestScreen : ReactiveObject, IScreen
     {
         RoutingState _Router;
-        public RoutingState Router {
+        public RoutingState Router
+        {
             get { return _Router; }
             set { this.RaiseAndSetIfChanged(ref _Router, value); }
         }
@@ -36,10 +40,10 @@ namespace ReactiveUI.Routing.Tests
 
     public class RoutingStateTests
     {
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
         public async Task NavigationPushPopTest()
         {
-            var input = new TestViewModel() {SomeProp = "Foo"};
+            var input = new TestViewModel() { SomeProp = "Foo" };
             var fixture = new RoutingState();
 
             Assert.False(await fixture.NavigateBack.CanExecute.FirstAsync());
@@ -58,11 +62,11 @@ namespace ReactiveUI.Routing.Tests
             Assert.Equal(1, fixture.NavigationStack.Count);
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
         public void CurrentViewModelObservableIsAccurate()
         {
             var fixture = new RoutingState();
-            var output = fixture.CurrentViewModel.CreateCollection();
+            var output = fixture.CurrentViewModel.CreateCollection(scheduler: ImmediateScheduler.Instance);
 
             Assert.Equal(1, output.Count);
 
@@ -78,11 +82,11 @@ namespace ReactiveUI.Routing.Tests
             Assert.Equal("A", ((TestViewModel)output.Last()).SomeProp);
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
         public void CurrentViewModelObservableIsAccurateViaWhenAnyObservable()
         {
             var fixture = new TestScreen();
-            var output = fixture.WhenAnyObservable(x => x.Router.CurrentViewModel).CreateCollection();
+            var output = fixture.WhenAnyObservable(x => x.Router.CurrentViewModel).CreateCollection(scheduler: ImmediateScheduler.Instance);
             fixture.Router = new RoutingState();
 
             Assert.Equal(1, output.Count);
@@ -99,7 +103,7 @@ namespace ReactiveUI.Routing.Tests
             Assert.Equal("A", ((TestViewModel)output.Last()).SomeProp);
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
         public void NavigateAndResetCheckNavigationStack()
         {
             var fixture = new TestScreen();
@@ -114,7 +118,7 @@ namespace ReactiveUI.Routing.Tests
             Assert.True(object.ReferenceEquals(fixture.Router.NavigationStack.First(), viewModel));
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
         public void SchedulerIsUsedForAllCommands()
         {
             var scheduler = new TestScheduler();
@@ -124,13 +128,13 @@ namespace ReactiveUI.Routing.Tests
             };
             var navigate = fixture
                 .Navigate
-                .CreateCollection();
+                .CreateCollection(scheduler: ImmediateScheduler.Instance);
             var navigateBack = fixture
                 .NavigateBack
-                .CreateCollection();
+                .CreateCollection(scheduler: ImmediateScheduler.Instance);
             var navigateAndReset = fixture
                 .NavigateAndReset
-                .CreateCollection();
+                .CreateCollection(scheduler: ImmediateScheduler.Instance);
 
             fixture.Navigate.Execute(new TestViewModel()).Subscribe();
             Assert.Empty(navigate);
