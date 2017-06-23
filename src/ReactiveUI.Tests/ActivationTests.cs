@@ -84,7 +84,7 @@ namespace ReactiveUI.Tests
 
     public class ActivatingViewModelTests
     {
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void ActivationsGetRefCounted()
         {
             var fixture = new ActivatingViewModel();
@@ -104,7 +104,7 @@ namespace ReactiveUI.Tests
             Assert.Equal(0, fixture.IsActiveCount);
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void DerivedActivationsDontGetStomped()
         {
             var fixture = new DerivedActivatingViewModel();
@@ -131,7 +131,7 @@ namespace ReactiveUI.Tests
 
     public class ActivatingViewTests
     {
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void ActivatingViewSmokeTest()
         {
             var locator = new ModernDependencyResolver();
@@ -157,7 +157,7 @@ namespace ReactiveUI.Tests
             }
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void NullingViewModelShouldDeactivateIt()
         {
             var locator = new ModernDependencyResolver();
@@ -182,7 +182,7 @@ namespace ReactiveUI.Tests
             }
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void SwitchingViewModelShouldDeactivateIt()
         {
             var locator = new ModernDependencyResolver();
@@ -211,7 +211,7 @@ namespace ReactiveUI.Tests
             }
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void SettingViewModelAfterLoadedShouldLoadIt()
         {
             var locator = new ModernDependencyResolver();
@@ -239,7 +239,7 @@ namespace ReactiveUI.Tests
             }
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void CanUnloadAndLoadViewAgain()
         {
             var locator = new ModernDependencyResolver();
@@ -272,7 +272,7 @@ namespace ReactiveUI.Tests
 
     public class ViewModelActivatorTests
     {
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void ActivatingTicksActivatedObservable()
         {
             var viewModelActivator = new ViewModelActivator();
@@ -283,7 +283,7 @@ namespace ReactiveUI.Tests
             Assert.Equal(1, activated.Count);
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void DeactivatingIgnoringRefCountTicksDeactivatedObservable()
         {
             var viewModelActivator = new ViewModelActivator();
@@ -294,7 +294,7 @@ namespace ReactiveUI.Tests
             Assert.Equal(1, deactivated.Count);
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void DeactivatingCountDoesntTickDeactivatedObservable()
         {
             var viewModelActivator = new ViewModelActivator();
@@ -305,7 +305,7 @@ namespace ReactiveUI.Tests
             Assert.Equal(0, deactivated.Count);
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void DeactivatingFollowingActivatingTicksDeactivatedObservable()
         {
             var viewModelActivator = new ViewModelActivator();
@@ -327,7 +327,7 @@ namespace ReactiveUI.Tests
             public IObservable<Unit> Deactivated { get; }
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void ReturnsPositiveForICanActivate()
         {
             var canActivateViewFetcher = new CanActivateViewFetcher();
@@ -335,7 +335,7 @@ namespace ReactiveUI.Tests
             Assert.True(affinity > 0);
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void ReturnsPositiveForICanActivateDerivatives()
         {
             var canActivateViewFetcher = new CanActivateViewFetcher();
@@ -343,7 +343,7 @@ namespace ReactiveUI.Tests
             Assert.True(affinity > 0);
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void ReturnsZeroForNonICanActivateDerivatives()
         {
             var canActivateViewFetcher = new CanActivateViewFetcher();
