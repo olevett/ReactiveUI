@@ -36,7 +36,7 @@ namespace ReactiveUI.Tests
             }
         }
 
-        [Fact]
+        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
         public void OAPHShouldFireChangeNotifications()
         {
             var input = new[] { 1, 2, 3, 3, 4 }.ToObservable();
@@ -56,7 +56,7 @@ namespace ReactiveUI.Tests
             });
         }
 
-        [Fact]
+        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
         public void OAPHShouldSkipFirstValueIfItMatchesTheInitialValue()
         {
             var input = new[] { 1, 2, 3 }.ToObservable();
@@ -74,7 +74,7 @@ namespace ReactiveUI.Tests
             });
         }
 
-        [Fact]
+        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
         public void OAPHShouldProvideInitialValueImmediatelyRegardlessOfScheduler()
         {
             var output = new List<int>();
@@ -87,7 +87,7 @@ namespace ReactiveUI.Tests
             });
         }
 
-        [Fact]
+        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
         public void OAPHShouldProvideLatestValue()
         {
             var sched = new TestScheduler();
@@ -107,7 +107,7 @@ namespace ReactiveUI.Tests
             Assert.Equal(4, fixture.Value);
         }
 
-        [Fact]
+        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
         public void OAPHShouldSubscribeImmediatelyToSource()
         {
             bool isSubscribed = false;
@@ -126,7 +126,7 @@ namespace ReactiveUI.Tests
             Assert.Equal(42, fixture.Value);
         }
 
-        [Fact]
+        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
         public void OAPHDeferSubscriptionParameterDefersSubscriptionToSource()
         {
             bool isSubscribed = false;
@@ -146,7 +146,7 @@ namespace ReactiveUI.Tests
             Assert.True(isSubscribed);
         }
 
-        [Fact]
+        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
         public void OAPHShouldRethrowErrors()
         {
             var input = new Subject<int>();
@@ -172,7 +172,7 @@ namespace ReactiveUI.Tests
             Assert.Equal(1, errors.Count);
         }
 
-        [Fact]
+        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
         public void NoThrownExceptionsSubscriberEqualsOAPHDeath()
         {
             (new TestScheduler()).With(sched => {
@@ -196,7 +196,7 @@ namespace ReactiveUI.Tests
             });
         }
 
-        [Fact]
+        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
         public void ToPropertyShouldFireBothChangingAndChanged()
         {
             var fixture = new OaphTestFixture();
@@ -225,7 +225,7 @@ namespace ReactiveUI.Tests
             Assert.Equal("Baz", resultChanged[1].Value);
         }
 
-        [Fact]
+        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
         public void ToPropertyShouldSubscribeOnlyOnce()
         {
             using (ProductionMode.Set()) {
@@ -243,7 +243,7 @@ namespace ReactiveUI.Tests
             }
         }
 
-        [Fact]
+        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
         public void ToProperty_GivenIndexer_NotifiesOnExpectedPropertyName()
         {
             (new TestScheduler()).With(sched => {

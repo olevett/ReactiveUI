@@ -62,7 +62,7 @@ namespace ReactiveUI.Tests
             Assert.Equal(42, input.CommandParameter);
         }
 
-        [Fact]
+        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
         public void EventBinderBindsToExplicitEvent()
         {
             var input = new TestFixture();

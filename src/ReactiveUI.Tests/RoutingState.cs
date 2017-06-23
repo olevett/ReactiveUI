@@ -36,7 +36,7 @@ namespace ReactiveUI.Routing.Tests
 
     public class RoutingStateTests
     {
-        [Fact]
+        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
         public async Task NavigationPushPopTest()
         {
             var input = new TestViewModel() {SomeProp = "Foo"};
@@ -58,7 +58,7 @@ namespace ReactiveUI.Routing.Tests
             Assert.Equal(1, fixture.NavigationStack.Count);
         }
 
-        [Fact]
+        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
         public void CurrentViewModelObservableIsAccurate()
         {
             var fixture = new RoutingState();
@@ -78,7 +78,7 @@ namespace ReactiveUI.Routing.Tests
             Assert.Equal("A", ((TestViewModel)output.Last()).SomeProp);
         }
 
-        [Fact]
+        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
         public void CurrentViewModelObservableIsAccurateViaWhenAnyObservable()
         {
             var fixture = new TestScreen();
@@ -99,7 +99,7 @@ namespace ReactiveUI.Routing.Tests
             Assert.Equal("A", ((TestViewModel)output.Last()).SomeProp);
         }
 
-        [Fact]
+        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
         public void NavigateAndResetCheckNavigationStack()
         {
             var fixture = new TestScreen();
@@ -114,7 +114,7 @@ namespace ReactiveUI.Routing.Tests
             Assert.True(object.ReferenceEquals(fixture.Router.NavigationStack.First(), viewModel));
         }
 
-        [Fact]
+        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
         public void SchedulerIsUsedForAllCommands()
         {
             var scheduler = new TestScheduler();

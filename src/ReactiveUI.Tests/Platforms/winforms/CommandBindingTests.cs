@@ -11,7 +11,7 @@ namespace ReactiveUI.Tests.Winforms
 {
     public class CommandBindingTests
     {
-        [Fact]
+        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
         public void CommandBinderBindsToButton()
         {
             var fixture = new CreatesWinformsCommandBinding();
@@ -35,7 +35,7 @@ namespace ReactiveUI.Tests.Winforms
             }
         }
 
-        [Fact]
+        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
         public void CommandBinderBindsToCustomControl()
         {
             var fixture = new CreatesWinformsCommandBinding();
@@ -59,7 +59,7 @@ namespace ReactiveUI.Tests.Winforms
             }
         }
 
-        [Fact]
+        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
         public void CommandBinderBindsToCustomComponent()
         {
             var fixture = new CreatesWinformsCommandBinding();
@@ -83,7 +83,7 @@ namespace ReactiveUI.Tests.Winforms
             }
         }
 
-        [Fact]
+        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
         public void CommandBinderAffectsEnabledState()
         {
             var fixture = new CreatesWinformsCommandBinding();
@@ -102,7 +102,7 @@ namespace ReactiveUI.Tests.Winforms
             }
         }
 
-        [Fact]
+        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
         public void CommandBinderAffectsEnabledStateForComponents()
         {
             var fixture = new CreatesWinformsCommandBinding();
@@ -153,7 +153,7 @@ namespace ReactiveUI.Tests.Winforms
 
     public class CommandBindingImplementationTests
     {
-        [Fact]
+        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
         public void CommandBindByNameWireup()
         {
             var vm = new WinformCommandBindViewModel();
@@ -178,7 +178,7 @@ namespace ReactiveUI.Tests.Winforms
         }
 
 
-        [Fact]
+        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
         public void CommandBindToExplicitEventWireup()
         {
             var vm = new WinformCommandBindViewModel();

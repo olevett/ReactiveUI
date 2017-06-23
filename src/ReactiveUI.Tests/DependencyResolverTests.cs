@@ -110,7 +110,7 @@
             }
         }
 
-        [Fact]
+        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
         public void SingleInstanceViewsShouldOnlyBeInstantiatedWhenRequested()
         {
             using (resolver.WithResolver()) {

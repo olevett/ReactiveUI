@@ -10,7 +10,7 @@ namespace ReactiveUI.Tests.Winforms
 {
     public class WinFormsRoutedViewHostTests
     {
-        [Fact]
+        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
         public void ShouldDisposePreviousView()
         {
             var viewLocator = new FakeViewLocator { LocatorFunc = t => new FakeWinformsView() };
@@ -28,7 +28,7 @@ namespace ReactiveUI.Tests.Winforms
             Assert.True(isDisposed);
         }
 
-        [Fact]
+        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
         public void ShouldSetDefaultContentWhenViewModelIsNull()
         {
             var defaultContent = new Control();
@@ -44,7 +44,7 @@ namespace ReactiveUI.Tests.Winforms
             Assert.True(target.Controls.Contains(defaultContent));
         }
 
-        [Fact]
+        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
         public void WhenRoutedToViewModelItShouldAddViewToControls()
         {
             var viewLocator = new FakeViewLocator { LocatorFunc = t => new FakeWinformsView() };

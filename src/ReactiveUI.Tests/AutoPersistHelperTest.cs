@@ -14,7 +14,7 @@ namespace ReactiveUI.Tests
 {
     public class AutoPersistHelperTest
     {
-        [Fact]
+        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
         public void AutoPersistDoesntWorkOnNonDataContractClasses()
         {
             var fixture = new HostTestFixture();
@@ -29,7 +29,7 @@ namespace ReactiveUI.Tests
             Assert.False(shouldDie);
         }
 
-        [Fact]
+        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
         public void AutoPersistHelperShouldntTriggerOnNonPersistableProperties()
         {
             (new TestScheduler()).With(sched => {
@@ -50,7 +50,7 @@ namespace ReactiveUI.Tests
             });
         }
 
-        [Fact]
+        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
         public void AutoPersistHelperSavesOnInterval()
         {
             (new TestScheduler()).With(sched => {
@@ -83,7 +83,7 @@ namespace ReactiveUI.Tests
             });
         }
 
-        [Fact]
+        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
         public void AutoPersistHelperDisconnects()
         {
             (new TestScheduler()).With(sched => {
@@ -119,7 +119,7 @@ namespace ReactiveUI.Tests
 
     public class AutoPersistCollectionTests
     {
-        [Fact]
+        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
         public void AutoPersistCollectionSmokeTest()
         {
             (new TestScheduler()).With(sched => {
@@ -171,7 +171,7 @@ namespace ReactiveUI.Tests
             });
         }
 
-        [Fact]
+        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
         public void AutoPersistCollectionDisconnectsOnDispose()
         {
             (new TestScheduler()).With(sched => {

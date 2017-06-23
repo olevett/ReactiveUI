@@ -6,7 +6,7 @@ namespace ReactiveUI.Tests
 
     public class BindingTypeConvertersTest
     {
-        [Fact]
+        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
         public void EqualityTypeConverterDoReferenceCastShouldConvertNullNullableValues()
         {
             double? nullDouble = null;
@@ -15,7 +15,7 @@ namespace ReactiveUI.Tests
             Assert.Equal(expected, result);
         }
 
-        [Fact]
+        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
         public void EqualityTypeConverterDoReferenceCastShouldConvertNullableValues()
         {
             double? doubleValue = 1.0;
@@ -24,14 +24,14 @@ namespace ReactiveUI.Tests
             Assert.Equal(expected, result);
         }
 
-        [Fact]
+        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
         public void EqualityTypeConverterDoReferenceCastShouldThrowWhenConvertingFromNullNullableToValueType()
         {
             double? nullDouble = null;
             Assert.Throws<InvalidCastException>(() => EqualityTypeConverter.DoReferenceCast(nullDouble, typeof(double)));
         }
 
-        [Fact]
+        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
         public void EqualityTypeConverterDoReferenceCastNullableToValueType()
         {
             double? doubleValue = 1.0;
@@ -40,7 +40,7 @@ namespace ReactiveUI.Tests
             Assert.Equal(expected, result);
         }
 
-        [Fact]
+        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
         public void EqualityTypeConverterDoReferenceCastShouldConvertValueTypes()
         {
             double doubleValue = 1.0;
