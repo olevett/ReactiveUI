@@ -12,7 +12,7 @@ namespace ReactiveUI.Tests
 {
     public class MessageBusTest
     {
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void MessageBusSmokeTest()
         {
             var input = new[] { 1, 2, 3, 4 };
@@ -36,8 +36,7 @@ namespace ReactiveUI.Tests
             input.AssertAreEqual(result);
         }
 
-
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void ExplicitSendMessageShouldWorkEvenAfterRegisteringSource()
         {
             var fixture = new MessageBus();
@@ -50,7 +49,7 @@ namespace ReactiveUI.Tests
             Assert.True(messageReceived);
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void ListeningBeforeRegisteringASourceShouldWork()
         {
             var fixture = new MessageBus();
@@ -65,7 +64,7 @@ namespace ReactiveUI.Tests
             Assert.Equal(42, result);
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void GCShouldNotKillMessageService()
         {
             var bus = new MessageBus();
@@ -83,7 +82,7 @@ namespace ReactiveUI.Tests
             Assert.True(recieved_message);
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void RegisteringSecondMessageSourceShouldMergeBothSources()
         {
             var bus = new MessageBus();
@@ -110,7 +109,7 @@ namespace ReactiveUI.Tests
             Assert.True(recieved_message2);
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public async Task MessageBusThreadingTest()
         {
             var mb = new MessageBus();
