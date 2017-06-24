@@ -11,7 +11,7 @@ namespace ReactiveUI.Tests
 {
     public class InteractionsTest
     {
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void RegisterNullHandlerShouldCauseException()
         {
             var interaction = new Interaction<Unit, Unit>();
@@ -21,7 +21,7 @@ namespace ReactiveUI.Tests
             Assert.Throws<ArgumentNullException>(() => interaction.RegisterHandler((Func<InteractionContext<Unit, Unit>, IObservable<Unit>>)null));
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void UnhandledInteractionsShouldCauseException()
         {
             var interaction = new Interaction<string, Unit>();
@@ -36,7 +36,7 @@ namespace ReactiveUI.Tests
             Assert.Equal("bar", ex.Input);
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void AttemptingToSetInteractionOutputMoreThanOnceShouldCauseException()
         {
             var interaction = new Interaction<Unit, Unit>();
@@ -50,7 +50,7 @@ namespace ReactiveUI.Tests
             Assert.Equal("Output has already been set.", ex.Message);
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void AttemptingToGetInteractionOutputBeforeItHasBeenSetShouldCauseException()
         {
             var interaction = new Interaction<Unit, Unit>();
@@ -63,7 +63,7 @@ namespace ReactiveUI.Tests
             Assert.Equal("Output has not been set.", ex.Message);
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void HandledInteractionsShouldNotCauseException()
         {
             var interaction = new Interaction<Unit, bool>();
@@ -72,7 +72,7 @@ namespace ReactiveUI.Tests
             interaction.Handle(Unit.Default).FirstAsync().Wait();
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void HandlersAreExecutedOnHandlerScheduler()
         {
             (new TestScheduler()).With(sched => {
@@ -92,7 +92,7 @@ namespace ReactiveUI.Tests
             });
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void NestedHandlersAreExecutedInReverseOrderOfSubscription()
         {
             var interaction = new Interaction<Unit, string>();
@@ -114,7 +114,7 @@ namespace ReactiveUI.Tests
             }
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void HandlersCanOptNotToHandleTheInteraction()
         {
             var interaction = new Interaction<bool, string>();
@@ -145,7 +145,7 @@ namespace ReactiveUI.Tests
             }
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void HandlersCanContainAsynchronousCode()
         {
             var scheduler = new TestScheduler();
@@ -182,7 +182,7 @@ namespace ReactiveUI.Tests
             Assert.False(handler1AWasCalled);
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void HandlersCanContainAsynchronousCodeViaTasks()
         {
             var interaction = new Interaction<Unit, string>();
@@ -198,7 +198,7 @@ namespace ReactiveUI.Tests
                 .Subscribe(r => result = r);
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void HandlersReturningObservablesCanReturnAnyKindOfObservable()
         {
             var interaction = new Interaction<Unit, string>();

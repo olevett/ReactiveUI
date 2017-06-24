@@ -11,7 +11,7 @@ namespace ReactiveUI.Tests
 {
     public class AwaiterTest
     {
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void AwaiterSmokeTest()
         {
             var fixture = awaitAnObservable();
