@@ -96,7 +96,7 @@ namespace ReactiveUI.Tests
 
     public class DefaultViewLocatorTests
     {
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void ByDefaultViewModelIsReplacedWithViewWhenDeterminingTheServiceName()
         {
             var resolver = new ModernDependencyResolver();
@@ -114,7 +114,7 @@ namespace ReactiveUI.Tests
             }
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void TheRuntimeTypeOfTheViewModelIsUsedToResolveTheView()
         {
             var resolver = new ModernDependencyResolver();
@@ -132,7 +132,7 @@ namespace ReactiveUI.Tests
             }
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void ViewModelToViewNamingConventionCanBeCustomized()
         {
             var resolver = new ModernDependencyResolver();
@@ -151,7 +151,7 @@ namespace ReactiveUI.Tests
             }
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void CanResolveViewFromViewModelClassUsingClassRegistration()
         {
             var resolver = new ModernDependencyResolver();
@@ -169,7 +169,7 @@ namespace ReactiveUI.Tests
             }
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void CanResolveViewFromViewModelClassUsingInterfaceRegistration()
         {
             var resolver = new ModernDependencyResolver();
@@ -187,7 +187,7 @@ namespace ReactiveUI.Tests
             }
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void CanResolveViewFromViewModelClassUsingIViewForRegistration()
         {
             var resolver = new ModernDependencyResolver();
@@ -205,7 +205,7 @@ namespace ReactiveUI.Tests
             }
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void CanResolveViewFromViewModelInterfaceUsingClassRegistration()
         {
             var resolver = new ModernDependencyResolver();
@@ -223,7 +223,7 @@ namespace ReactiveUI.Tests
             }
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void CanResolveViewFromViewModelInterfaceUsingInterfaceRegistration()
         {
             var resolver = new ModernDependencyResolver();
@@ -241,7 +241,7 @@ namespace ReactiveUI.Tests
             }
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void CanResolveViewFromViewModelInterfaceUsingIViewForRegistration()
         {
             var resolver = new ModernDependencyResolver();
@@ -259,7 +259,7 @@ namespace ReactiveUI.Tests
             }
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void ContractIsUsedWhenResolvingView()
         {
             var resolver = new ModernDependencyResolver();
@@ -284,7 +284,7 @@ namespace ReactiveUI.Tests
             }
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void NoErrorIsRaisedIfATypeCannotBeFound()
         {
             var resolver = new ModernDependencyResolver();
@@ -302,7 +302,7 @@ namespace ReactiveUI.Tests
             }
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void NoErrorIsRaisedIfAServiceCannotBeFound()
         {
             var resolver = new ModernDependencyResolver();
@@ -319,7 +319,7 @@ namespace ReactiveUI.Tests
             }
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void NoErrorIsRaisedIfTheServiceDoesNotImplementIViewFor()
         {
             var resolver = new ModernDependencyResolver();
@@ -337,7 +337,7 @@ namespace ReactiveUI.Tests
             }
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void AnErrorIsRaisedIfTheCreationOfTheViewFails()
         {
             var resolver = new ModernDependencyResolver();
@@ -355,7 +355,7 @@ namespace ReactiveUI.Tests
             }
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void WithOddInterfaceNameDoesntThrowException()
         {
             var resolver = new ModernDependencyResolver();
@@ -372,7 +372,7 @@ namespace ReactiveUI.Tests
             }
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void CanResolveViewFromViewModelWithIRoutableViewModelType()
         {
             var resolver = new ModernDependencyResolver();
