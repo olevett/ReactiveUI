@@ -403,13 +403,14 @@ Task("MinimalBuildAndTest")
 
     build("./src/ReactiveUI.Tests/ReactiveUI.Tests.csproj");
 
-    XUnit2("./src/ReactiveUI.Tests/bin/**/*.Tests.dll", new XUnit2Settings {
-            OutputDirectory = artifactDirectory,
-            XmlReportV1 = true,
-            NoAppDomain = true
-    });
+    for(var i = 0; i < 10; i++) {
+        XUnit2("./src/ReactiveUI.Tests/bin/**/*.Tests.dll", new XUnit2Settings {
+                OutputDirectory = artifactDirectory,
+                XmlReportV1 = true,
+                NoAppDomain = true
+        });
+    }
 });
-
 
 //////////////////////////////////////////////////////////////////////
 // TASK TARGETS
