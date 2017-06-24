@@ -13,7 +13,7 @@ namespace ReactiveUI.Tests
 {
     public class ObservedChangedMixinTest
     {
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void GetValueShouldActuallyReturnTheValue()
         {
             var input = new[] {"Foo", "Bar", "Baz"};
@@ -35,7 +35,7 @@ namespace ReactiveUI.Tests
             });
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void GetValueShouldReturnTheValueFromAPath()
         {
             var input = new HostTestFixture() {
@@ -48,7 +48,7 @@ namespace ReactiveUI.Tests
             Assert.Equal("Foo", fixture.GetValue());
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void SetValuePathSmokeTest()
         {
             var output = new HostTestFixture() {
@@ -62,7 +62,7 @@ namespace ReactiveUI.Tests
             Assert.Equal("Bar", output.Child.IsNotNullString);
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void BindToSmokeTest()
         {
             (new TestScheduler()).With(sched => {
@@ -83,7 +83,7 @@ namespace ReactiveUI.Tests
             });
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void DisposingDisconnectsTheBindTo()
         {
             (new TestScheduler()).With(sched => {
@@ -106,7 +106,7 @@ namespace ReactiveUI.Tests
             });
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void BindToIsNotFooledByIntermediateObjectSwitching()
         {
             (new TestScheduler()).With(sched => {
@@ -131,7 +131,7 @@ namespace ReactiveUI.Tests
             });
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void BindToStackOverFlowTest()
         {
             // Before the code changes packed in the same commit
@@ -163,7 +163,7 @@ namespace ReactiveUI.Tests
             viewmodel = new NewGameViewModel();
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void CanAddUpToSevenPlayers()
         {
             foreach (var i in Enumerable.Range(1, 7)) {
