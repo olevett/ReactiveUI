@@ -377,6 +377,40 @@ Task("PublishRelease")
     GitReleaseManagerClose(username, token, githubOwner, githubRepository, majorMinorPatch);
 });
 
+
+Task("MinimalBuildAndTest")
+    .Does (() =>
+{
+    Action<string> build = (solution) =>
+    {
+        Information("Building {0}", solution);
+
+        FilePath msBuildPath = VSWhereLatest().CombineWithFilePath("./MSBuild/15.0/Bin/MSBuild.exe");
+
+        MSBuild(solution, new MSBuildSettings() {
+                ToolPath= msBuildPath
+            }
+            .WithTarget("restore;pack")
+            .WithProperty("PackageOutputPath",  MakeAbsolute(Directory(artifactDirectory)).ToString())
+            .WithProperty("TreatWarningsAsErrors", treatWarningsAsErrors.ToString())
+            .SetConfiguration("Release")
+            // Due to https://github.com/NuGet/Home/issues/4790 and https://github.com/NuGet/Home/issues/4337 we
+            // have to pass a version explicitly
+            .WithProperty("Version", nugetVersion.ToString())
+            .SetVerbosity(Verbosity.Minimal)
+            .SetNodeReuse(false));
+    };
+
+    build("./src/ReactiveUI.Tests/ReactiveUI.Tests.csproj");
+
+    XUnit2("./src/ReactiveUI.Tests/bin/**/*.Tests.dll", new XUnit2Settings {
+            OutputDirectory = artifactDirectory,
+            XmlReportV1 = true,
+            NoAppDomain = true
+    });
+});
+
+
 //////////////////////////////////////////////////////////////////////
 // TASK TARGETS
 //////////////////////////////////////////////////////////////////////
