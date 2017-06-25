@@ -7,7 +7,7 @@ namespace ReactiveUI.Tests
 {
     public class TestUtilsTest
     {
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public async Task WithAsyncScheduler()
         {
             await new TestScheduler().WithAsync(_ => Task.Run(() => { }));
