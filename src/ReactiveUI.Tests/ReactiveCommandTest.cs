@@ -14,7 +14,7 @@ namespace ReactiveUI.Tests
 {
     public class ReactiveCommandTest
     {
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void CreateThrowsIfExecutionParameterIsNull()
         {
             Assert.Throws<ArgumentNullException>(() => ReactiveCommand.Create((Action)null));
@@ -27,7 +27,7 @@ namespace ReactiveUI.Tests
             Assert.Throws<ArgumentNullException>(() => ReactiveCommand.Create((Func<Unit, Task<Unit>>)null));
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void CanExecuteIsBehavioral()
         {
             var fixture = ReactiveCommand.Create(() => Observables.Unit);
@@ -39,7 +39,7 @@ namespace ReactiveUI.Tests
             Assert.True(canExecute[0]);
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void CanExecuteOnlyTicksDistinctValues()
         {
             var canExecuteSubject = new Subject<bool>();
@@ -60,7 +60,7 @@ namespace ReactiveUI.Tests
             Assert.True(canExecute[1]);
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void CanExecuteIsFalseIfCallerDictatesAsSuch()
         {
             var canExecuteSubject = new Subject<bool>();
@@ -78,7 +78,7 @@ namespace ReactiveUI.Tests
             Assert.False(canExecute[2]);
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void CanExecuteIsFalseIfAlreadyExecuting()
         {
             (new TestScheduler()).With(sched => {
@@ -101,7 +101,7 @@ namespace ReactiveUI.Tests
             });
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void CanExecuteIsUnsubscribedAfterCommandDisposal()
         {
             var canExecuteSubject = new Subject<bool>();
@@ -114,7 +114,7 @@ namespace ReactiveUI.Tests
             Assert.False(canExecuteSubject.HasObservers);
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void CanExecuteTicksFailuresThroughThrownExceptions()
         {
             var canExecuteSubject = new Subject<bool>();
@@ -129,7 +129,7 @@ namespace ReactiveUI.Tests
             Assert.Equal("oops", thrownExceptions[0].Message);
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void CanExecuteIsAvailableViaICommand()
         {
             var canExecuteSubject = new Subject<bool>();
@@ -144,7 +144,7 @@ namespace ReactiveUI.Tests
             Assert.False(fixture.CanExecute(null));
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void CanExecuteChangedIsAvailableViaICommand()
         {
             var canExecuteSubject = new Subject<bool>();
@@ -160,7 +160,7 @@ namespace ReactiveUI.Tests
             Assert.False(canExecuteChanged[1]);
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void IsExecutingIsBehavioral()
         {
             var fixture = ReactiveCommand.Create(() => Observables.Unit);
@@ -172,7 +172,7 @@ namespace ReactiveUI.Tests
             Assert.False(isExecuting[0]);
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void IsExecutingTicksAsExecutionsProgress()
         {
             (new TestScheduler()).With(sched => {
@@ -196,7 +196,7 @@ namespace ReactiveUI.Tests
             });
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void IsExecutingRemainsTrueAsLongAsExecutionPipelineHasNotCompleted()
         {
             var execute = new Subject<Unit>();
@@ -218,7 +218,7 @@ namespace ReactiveUI.Tests
             Assert.False(fixture.IsExecuting.FirstAsync().Wait());
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void SynchronousCommandExecuteLazily()
         {
             var executionCount = 0;
@@ -246,7 +246,7 @@ namespace ReactiveUI.Tests
             Assert.Equal(4, executionCount);
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void SynchronousCommandsFailCorrectly()
         {
             var fixture1 = ReactiveCommand.Create(() => { throw new InvalidOperationException(); });
@@ -292,7 +292,7 @@ namespace ReactiveUI.Tests
             Assert.Equal(4, failureCount);
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void ExecutePassesThroughParameter()
         {
             var parameters = new List<int>();
@@ -311,7 +311,7 @@ namespace ReactiveUI.Tests
             Assert.Equal(348, parameters[2]);
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void ExecuteResultIsDeliveredOnSpecifiedScheduler()
         {
             (new TestScheduler()).With(sched => {
@@ -327,7 +327,7 @@ namespace ReactiveUI.Tests
             });
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void ExecuteTicksThroughTheResult()
         {
             var num = 0;
@@ -348,7 +348,7 @@ namespace ReactiveUI.Tests
             Assert.Equal(30, results[2]);
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void ExecuteCanTickThroughMultipleResults()
         {
             var fixture = ReactiveCommand.CreateFromObservable(() => new[] { 1, 2, 3 }.ToObservable());
@@ -363,7 +363,7 @@ namespace ReactiveUI.Tests
             Assert.Equal(3, results[2]);
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void ExecuteTicksAnyException()
         {
             var fixture = ReactiveCommand.CreateFromObservable(() => Observable.Throw<Unit>(new InvalidOperationException()));
@@ -381,7 +381,7 @@ namespace ReactiveUI.Tests
             Assert.IsType<InvalidOperationException>(exception);
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void ExecuteTicksAnyLambdaException()
         {
             var fixture = ReactiveCommand.CreateFromObservable<Unit>(() => { throw new InvalidOperationException(); });
@@ -399,7 +399,7 @@ namespace ReactiveUI.Tests
             Assert.IsType<InvalidOperationException>(exception);
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void ExecuteCanBeCancelled()
         {
             (new TestScheduler()).With(sched => {
@@ -422,7 +422,7 @@ namespace ReactiveUI.Tests
             });
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void ExceptionsAreDeliveredOnOutputScheduler()
         {
             (new TestScheduler()).With(sched => {
@@ -443,7 +443,7 @@ namespace ReactiveUI.Tests
             });
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void ExecuteIsAvailableViaICommand()
         {
             var executed = false;
@@ -456,7 +456,7 @@ namespace ReactiveUI.Tests
             Assert.True(executed);
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void ExecuteViaICommandWorksWithNullableTypes()
         {
             int? value = null;
@@ -471,7 +471,7 @@ namespace ReactiveUI.Tests
             Assert.Null(value);
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void ExecuteViaICommandThrowsIfParameterTypeIsIncorrect()
         {
             ICommand fixture = ReactiveCommand.Create<int>(_ => { });
@@ -483,7 +483,7 @@ namespace ReactiveUI.Tests
             Assert.Equal("Command requires parameters of type System.String, but received parameter of type System.Int32.", ex.Message);
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void ResultIsTickedThroughSpecifiedScheduler()
         {
             (new TestScheduler()).With(sched => {
@@ -499,7 +499,7 @@ namespace ReactiveUI.Tests
             });
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void ExecuteTicksErrorsThroughThrownExceptions()
         {
             var fixture = ReactiveCommand.CreateFromObservable(() => Observable.Throw<Unit>(new InvalidOperationException("oops")));
@@ -517,7 +517,7 @@ namespace ReactiveUI.Tests
             Assert.Equal("oops", thrownExceptions[0].Message);
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void ExecuteTicksLambdaErrorsThroughThrownExceptions()
         {
             var fixture = ReactiveCommand.CreateFromObservable<Unit>(() => { throw new InvalidOperationException("oops"); });
@@ -535,7 +535,7 @@ namespace ReactiveUI.Tests
             Assert.Equal("oops", thrownExceptions[0].Message);
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void ExecuteReenablesExecutionEvenAfterFailure()
         {
             var fixture = ReactiveCommand.CreateFromObservable(() => Observable.Throw<Unit>(new InvalidOperationException("oops")));
@@ -561,7 +561,7 @@ namespace ReactiveUI.Tests
             Assert.True(canExecute[2]);
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void CreateTaskFacilitatesTPLIntegration()
         {
             var fixture = ReactiveCommand.CreateFromTask(() => Task.FromResult(13));
@@ -574,7 +574,7 @@ namespace ReactiveUI.Tests
             Assert.Equal(13, results[0]);
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void CreateTaskFacilitatesTPLIntegrationWithParameter()
         {
             var fixture = ReactiveCommand.CreateFromTask<int, int>(param => Task.FromResult(param + 1));
@@ -589,7 +589,7 @@ namespace ReactiveUI.Tests
             Assert.Equal(42, results[1]);
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void InvokeCommandAgainstReactiveCommandInvokesTheCommand()
         {
             var executionCount = 0;
@@ -604,7 +604,7 @@ namespace ReactiveUI.Tests
             Assert.Equal(2, executionCount);
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void InvokeCommandAgainstReactiveCommandPassesTheSpecifiedValueToExecute()
         {
             var executeReceived = 0;
@@ -616,7 +616,7 @@ namespace ReactiveUI.Tests
             Assert.Equal(42, executeReceived);
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void InvokeCommandAgainstReactiveCommandRespectsCanExecute()
         {
             var executed = false;
@@ -633,7 +633,7 @@ namespace ReactiveUI.Tests
             Assert.True(executed);
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void InvokeCommandAgainstReactiveCommandRespectsCanExecuteWindow()
         {
             var executed = false;
@@ -651,7 +651,7 @@ namespace ReactiveUI.Tests
             Assert.False(executed);
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void InvokeCommandAgainstReactiveCommandSwallowsExceptions()
         {
             var count = 0;
@@ -670,7 +670,7 @@ namespace ReactiveUI.Tests
             Assert.Equal(2, count);
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void InvokeCommandAgainstICommandInvokesTheCommand()
         {
             var executionCount = 0;
@@ -685,7 +685,7 @@ namespace ReactiveUI.Tests
             Assert.Equal(2, executionCount);
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void InvokeCommandAgainstICommandPassesTheSpecifiedValueToCanExecuteAndExecute()
         {
             var fixture = new FakeCommand();
@@ -697,7 +697,7 @@ namespace ReactiveUI.Tests
             Assert.Equal(42, fixture.ExecuteParameter);
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void InvokeCommandAgainstICommandRespectsCanExecute()
         {
             var executed = false;
@@ -714,7 +714,7 @@ namespace ReactiveUI.Tests
             Assert.True(executed);
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void InvokeCommandAgainstICommandRespectsCanExecuteWindow()
         {
             var executed = false;
@@ -732,7 +732,7 @@ namespace ReactiveUI.Tests
             Assert.False(executed);
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void InvokeCommandAgainstICommandSwallowsExceptions()
         {
             var count = 0;
@@ -751,7 +751,7 @@ namespace ReactiveUI.Tests
             Assert.Equal(2, count);
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void InvokeCommandAgainstICommandInTargetInvokesTheCommand()
         {
             var executionCount = 0;
@@ -767,7 +767,7 @@ namespace ReactiveUI.Tests
             Assert.Equal(2, executionCount);
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void InvokeCommandAgainstICommandInTargetPassesTheSpecifiedValueToCanExecuteAndExecute()
         {
             var fixture = new ICommandHolder();
@@ -781,7 +781,7 @@ namespace ReactiveUI.Tests
             Assert.Equal(42, command.ExecuteParameter);
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void InvokeCommandAgainstICommandInTargetRespectsCanExecute()
         {
             var executed = false;
@@ -799,7 +799,7 @@ namespace ReactiveUI.Tests
             Assert.True(executed);
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void InvokeCommandAgainstICommandInTargetRespectsCanExecuteWindow()
         {
             var executed = false;
@@ -818,7 +818,7 @@ namespace ReactiveUI.Tests
             Assert.False(executed);
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void InvokeCommandAgainstICommandInTargetSwallowsExceptions()
         {
             var count = 0;
@@ -839,7 +839,7 @@ namespace ReactiveUI.Tests
             Assert.Equal(2, count);
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void InvokeCommandAgainstReactiveCommandInTargetInvokesTheCommand()
         {
             var executionCount = 0;
@@ -855,7 +855,7 @@ namespace ReactiveUI.Tests
             Assert.Equal(2, executionCount);
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void InvokeCommandAgainstReactiveCommandInTargetPassesTheSpecifiedValueToExecute()
         {
             var executeReceived = 0;
@@ -868,7 +868,7 @@ namespace ReactiveUI.Tests
             Assert.Equal(42, executeReceived);
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void InvokeCommandAgainstReactiveCommandInTargetRespectsCanExecute()
         {
             var executed = false;
@@ -886,7 +886,7 @@ namespace ReactiveUI.Tests
             Assert.True(executed);
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void InvokeCommandAgainstReactiveCommandInTargetRespectsCanExecuteWindow()
         {
             var executed = false;
@@ -905,7 +905,7 @@ namespace ReactiveUI.Tests
             Assert.False(executed);
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void InvokeCommandAgainstReactiveCommandInTargetSwallowsExceptions()
         {
             var count = 0;
@@ -978,7 +978,7 @@ namespace ReactiveUI.Tests
 
     public class CombinedReactiveCommandTest
     {
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void CanExecuteIsFalseIfAnyChildCannotExecute()
         {
             var child1 = ReactiveCommand.Create(() => Observables.Unit);
@@ -993,7 +993,7 @@ namespace ReactiveUI.Tests
             Assert.False(canExecute[0]);
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void CanExecuteIsFalseIfParentCanExecuteIsFalse()
         {
             var child1 = ReactiveCommand.Create(() => Observables.Unit);
@@ -1008,7 +1008,7 @@ namespace ReactiveUI.Tests
             Assert.False(canExecute[0]);
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void CanExecuteTicksFailuresThroughThrownExceptions()
         {
             var canExecuteSubject = new Subject<bool>();
@@ -1026,7 +1026,7 @@ namespace ReactiveUI.Tests
             Assert.Equal("oops", thrownExceptions[0].Message);
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void CanExecuteTicksFailuresInChildCanExecuteThroughThrownExceptions()
         {
             var canExecuteSubject = new Subject<bool>();
@@ -1044,7 +1044,7 @@ namespace ReactiveUI.Tests
             Assert.Equal("oops", thrownExceptions[0].Message);
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void ExecuteExecutesAllChildCommands()
         {
             var child1 = ReactiveCommand.Create(() => Observables.Unit);
@@ -1089,7 +1089,7 @@ namespace ReactiveUI.Tests
             Assert.False(child3IsExecuting[2]);
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void ExecuteTicksThroughTheResults()
         {
             var child1 = ReactiveCommand.CreateFromObservable(() => Observable.Return(1));
@@ -1108,7 +1108,7 @@ namespace ReactiveUI.Tests
             Assert.Equal(2, results[0][1]);
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void ResultIsTickedThroughSpecifiedScheduler()
         {
             (new TestScheduler()).With(sched => {
@@ -1127,7 +1127,7 @@ namespace ReactiveUI.Tests
             });
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void ExecuteTicksErrorsInAnyChildCommandThroughThrownExceptions()
         {
             var child1 = ReactiveCommand.CreateFromObservable(() => Observables.Unit);
@@ -1148,7 +1148,7 @@ namespace ReactiveUI.Tests
             Assert.Equal("oops", thrownExceptions[0].Message);
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void ExceptionsAreDeliveredOnOutputScheduler()
         {
             (new TestScheduler()).With(sched => {

@@ -6,7 +6,7 @@ namespace ReactiveUI.Tests.Winforms
 {
     public class ActivationTests
     {
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void ActivationForViewFetcherSupportsDefaultWinformsComponents()
         {
             var target = new ReactiveUI.Winforms.ActivationForViewFetcher();
@@ -17,7 +17,7 @@ namespace ReactiveUI.Tests.Winforms
             }
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void CanFetchActivatorForForm()
         {
             var form = new TestForm();
@@ -28,7 +28,7 @@ namespace ReactiveUI.Tests.Winforms
         }
 
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void CanFetchActivatorForControl()
         {
             var control = new TestControl();
@@ -38,7 +38,7 @@ namespace ReactiveUI.Tests.Winforms
             Assert.NotNull(activator);
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void SmokeTestWindowsForm()
         {
             var target = new ReactiveUI.Winforms.ActivationForViewFetcher();
@@ -72,7 +72,7 @@ namespace ReactiveUI.Tests.Winforms
             }
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void SmokeTestUserControl()
         {
             var target = new ReactiveUI.Winforms.ActivationForViewFetcher();
