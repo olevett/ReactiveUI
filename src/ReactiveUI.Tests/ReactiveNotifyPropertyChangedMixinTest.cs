@@ -113,7 +113,7 @@ namespace ReactiveUI.Tests
 
     public class ReactiveNotifyPropertyChangedMixinTest
     {
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void OFPSimplePropertyTest()
         {
             (new TestScheduler()).With(sched => {
@@ -142,7 +142,7 @@ namespace ReactiveUI.Tests
             });
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void OFPSimpleChildPropertyTest()
         {
             (new TestScheduler()).With(sched => {
@@ -171,7 +171,7 @@ namespace ReactiveUI.Tests
             });
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void OFPReplacingTheHostShouldResubscribeTheObservable()
         {
             (new TestScheduler()).With(sched => {
@@ -212,7 +212,7 @@ namespace ReactiveUI.Tests
         }
 
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void OFPReplacingTheHostWithNullThenSettingItBackShouldResubscribeTheObservable()
         {
             (new TestScheduler()).With(sched => {
@@ -244,7 +244,7 @@ namespace ReactiveUI.Tests
             });
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void OFPChangingTheHostPropertyShouldFireAChildChangeNotificationOnlyIfThePreviousChildIsDifferent()
         {
             (new TestScheduler()).With(sched => {
@@ -265,7 +265,7 @@ namespace ReactiveUI.Tests
             });
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void OFPShouldWorkWithINPCObjectsToo()
         {
             (new TestScheduler()).With(sched => {
@@ -287,7 +287,7 @@ namespace ReactiveUI.Tests
             });
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void AnyChangeInExpressionListTriggersUpdate()
         {
             var obj = new ObjChain1();
@@ -312,7 +312,7 @@ namespace ReactiveUI.Tests
             Assert.True(obsUpdated);
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void SubscriptionToWhenAnyShouldReturnCurrentValue()
         {
             var obj = new HostTestFixture();
@@ -325,7 +325,7 @@ namespace ReactiveUI.Tests
             Assert.True(observedValue == obj.SomeOtherParam);
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void MultiPropertyExpressionsShouldBeProperlyResolved()
         {
             var data = new Dictionary<Expression<Func<HostTestFixture, object>>, string[]>() {
@@ -353,7 +353,7 @@ namespace ReactiveUI.Tests
             }
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void WhenAnySmokeTest()
         {
             (new TestScheduler()).With(sched => {
@@ -395,7 +395,7 @@ namespace ReactiveUI.Tests
             });
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void WhenAnyShouldWorkEvenWithNormalProperties()
         {
             var fixture = new TestFixture() { IsNotNullString = "Foo", IsOnlyOneWord = "Baz", PocoProperty = "Bamf" };
@@ -427,7 +427,7 @@ namespace ReactiveUI.Tests
             Assert.Equal(null, output4[0]);
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void WhenAnyValueSmokeTest()
         {
             (new TestScheduler()).With(sched => {
@@ -463,7 +463,7 @@ namespace ReactiveUI.Tests
             });
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void WhenAnyValueShouldWorkEvenWithNormalProperties()
         {
             var fixture = new TestFixture() { IsNotNullString = "Foo", IsOnlyOneWord = "Baz", PocoProperty = "Bamf" };
@@ -479,7 +479,7 @@ namespace ReactiveUI.Tests
             Assert.Equal(3, output2[0]);
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void WhenAnyShouldRunInContext()
         {
             var tid = Thread.CurrentThread.ManagedThreadId;
@@ -500,7 +500,7 @@ namespace ReactiveUI.Tests
             });
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void OFPNamedPropertyTest()
         {
             (new TestScheduler()).With(sched => {
@@ -529,7 +529,7 @@ namespace ReactiveUI.Tests
             });
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void OFPNamedPropertyTestNoSkipInitial()
         {
             (new TestScheduler()).With(sched => {
@@ -549,7 +549,7 @@ namespace ReactiveUI.Tests
             });
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void OFPNamedPropertyTestBeforeChange()
         {
             (new TestScheduler()).With(sched => {
@@ -573,7 +573,7 @@ namespace ReactiveUI.Tests
             });
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void OFPNamedPropertyTestRepeats()
         {
             (new TestScheduler()).With(sched => {
@@ -605,7 +605,7 @@ namespace ReactiveUI.Tests
 
     public class WhenAnyObservableTests
     {
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public async Task WhenAnyObservableSmokeTestMerging()
         {
             var fixture = new TestWhenAnyObsViewModel();
@@ -630,7 +630,7 @@ namespace ReactiveUI.Tests
                                 .All(x => x.expected == x.actual));
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public async Task WhenAnyObservableSmokeTestCombining()
         {
             var fixture = new TestWhenAnyObsViewModel();
@@ -656,7 +656,7 @@ namespace ReactiveUI.Tests
                                 .All(x => x.expected == x.actual));
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void WhenAnyObservableWithNullObjectShouldUpdateWhenObjectIsntNullAnymore()
         {
             var fixture = new TestWhenAnyObsViewModel();
@@ -674,7 +674,7 @@ namespace ReactiveUI.Tests
             Assert.Equal(1, output.Count);
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void NullObservablesDoNotCauseExceptions()
         {
             var fixture = new TestWhenAnyObsViewModel();
