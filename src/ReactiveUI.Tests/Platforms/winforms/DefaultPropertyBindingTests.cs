@@ -10,7 +10,7 @@ namespace ReactiveUI.Tests.Winforms
 {
     public class DefaultPropertyBindingTests
     {
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void WinformsCreatesObservableForPropertyWorksForTextboxes()
         {
             var input = new TextBox();
@@ -33,7 +33,7 @@ namespace ReactiveUI.Tests.Winforms
             Assert.Equal(1, output.Count);
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void WinformsCreatesObservableForPropertyWorksForComponents()
         {
             var input = new ToolStripButton(); // ToolStripButton is a Component, not a Control
@@ -57,7 +57,7 @@ namespace ReactiveUI.Tests.Winforms
             Assert.Equal(1, output.Count);
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void WinformsCreatesObservableForPropertyWorksForThirdPartyControls()
         {
             var input = new AThirdPartyNamespace.ThirdPartyControl();
@@ -80,7 +80,7 @@ namespace ReactiveUI.Tests.Winforms
             Assert.Equal(1, output.Count);
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void CanBindViewModelToWinformControls()
         {
             var vm = new FakeWinformViewModel();
@@ -102,7 +102,7 @@ namespace ReactiveUI.Tests.Winforms
             Assert.Equal(vm.SomeDouble.ToString(), view.Property3.Text);
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void SmokeTestWinformControls()
         {
             var vm = new FakeWinformViewModel();
