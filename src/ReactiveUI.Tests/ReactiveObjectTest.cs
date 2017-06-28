@@ -102,7 +102,7 @@ namespace ReactiveUI.Tests
 
     public class ReactiveObjectTest
     {
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void ReactiveObjectSmokeTest()
         {
             var output_changing = new List<string>();
@@ -126,7 +126,7 @@ namespace ReactiveUI.Tests
             results.AssertAreEqual(output);
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void ReactiveObjectShouldntSerializeAnythingExtra()
         {
             var fixture = new TestFixture() { IsNotNullString = "Foo", IsOnlyOneWord = "Baz" };
@@ -139,7 +139,7 @@ namespace ReactiveUI.Tests
             Assert.True(json.Count(x => x == '"') == 18);
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void RaiseAndSetUsingExpression()
         {
             var fixture = new TestFixture() { IsNotNullString = "Foo", IsOnlyOneWord = "Baz" };
@@ -155,7 +155,7 @@ namespace ReactiveUI.Tests
         }
 
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void ObservableForPropertyUsingExpression()
         {
             var fixture = new TestFixture() { IsNotNullString = "Foo", IsOnlyOneWord = "Baz" };
@@ -181,7 +181,7 @@ namespace ReactiveUI.Tests
             Assert.Equal("Baz", output[1].Value);
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void ChangingShouldAlwaysArriveBeforeChanged()
         {
             string before_set = "Foo";
@@ -213,7 +213,7 @@ namespace ReactiveUI.Tests
             Assert.True(after_fired);
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void ExceptionsThrownInSubscribersShouldMarshalToThrownExceptions()
         {
             var fixture = new TestFixture() { IsOnlyOneWord = "Foo" };
@@ -225,7 +225,7 @@ namespace ReactiveUI.Tests
             Assert.Equal(1, exceptionList.Count);
         }
 
-        [Fact(Skip = "Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void DeferringNotificationsDontShowUpUntilUndeferred()
         {
             var fixture = new TestFixture();
