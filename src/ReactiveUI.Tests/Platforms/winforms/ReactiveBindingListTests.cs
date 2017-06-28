@@ -9,7 +9,7 @@ namespace ReactiveUI.Tests.Winforms
 {
     public class ReactiveBindingListTests
     {
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void RaisesListChangedEventOnAdd()
         {
             var target = new ReactiveBindingList<string>();
@@ -23,7 +23,7 @@ namespace ReactiveUI.Tests.Winforms
             Assert.True(capturedEvents[0].NewIndex == 0);
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void RaisesListChangedEventOnRemove()
         {
             var target = new ReactiveBindingList<string>(new string[]{"item1","item2"});
@@ -38,7 +38,7 @@ namespace ReactiveUI.Tests.Winforms
             Assert.Equal(-1, capturedEvents[0].OldIndex);
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void RaisesListChangedEventOnChange()
         {
             var target = new ReactiveBindingList<string>(new string[] { "item1", "item2" });
@@ -53,7 +53,7 @@ namespace ReactiveUI.Tests.Winforms
             Assert.Equal(-1, capturedEvents[0].OldIndex);
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void RaisesListChangedEventOnMove()
         {
             var target = new ReactiveBindingList<string>(new string[] { "item1", "item2" });
@@ -69,7 +69,7 @@ namespace ReactiveUI.Tests.Winforms
             Assert.Equal(0, capturedEvents[0].OldIndex);
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void RaisesListChangedEventOnReset()
         {
             var target = new ReactiveBindingList<string>(new string[] { "item1", "item2" });
@@ -84,7 +84,7 @@ namespace ReactiveUI.Tests.Winforms
             Assert.Equal(-1, capturedEvents[0].OldIndex);
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void RaisesMultipleEventsListChangedEventOnRemoveRange()
         {
             var target = new ReactiveBindingList<string>(new string[] { "item1", "item2" ,"item3"});
@@ -102,7 +102,7 @@ namespace ReactiveUI.Tests.Winforms
             Assert.Equal(-1, capturedEvents[1].OldIndex);
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void RaisesMultipleEventsListChangedEventOnAddRange()
         {
             var target = new ReactiveBindingList<string>(new string[] { "item1", "item2", "item3" });
@@ -123,7 +123,7 @@ namespace ReactiveUI.Tests.Winforms
             Assert.Equal(-1, capturedEvents[2].OldIndex);
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void RaisesMultipleEventsListChangedEventOnInsertRange()
         {
             var target = new ReactiveBindingList<string>(new string[] { "item1", "item2", "item3" });
@@ -144,7 +144,7 @@ namespace ReactiveUI.Tests.Winforms
             Assert.Equal(-1, capturedEvents[2].OldIndex);
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void RaisesResetEventWhileItemsAddedOnSuppressChanges()
         {
             var target = new ReactiveBindingList<string>(new string[] { "item1", "item2", "item3" });
@@ -159,7 +159,7 @@ namespace ReactiveUI.Tests.Winforms
             Assert.Equal(ListChangedType.Reset, capturedEvents[0].ListChangedType);
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void RaisesResetEventWhenAboveTreshold()
         {
             var target = new ReactiveBindingList<string>(new string[] { "item1", "item2", "item3" });
@@ -173,7 +173,7 @@ namespace ReactiveUI.Tests.Winforms
             Assert.Equal(ListChangedType.Reset, capturedEvents[0].ListChangedType);
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void DerivedCollectionsShouldRaiseListChangedEvents()
         {
             var input = new[] { "Foo", "Bar", "Baz", "Bamf" };
