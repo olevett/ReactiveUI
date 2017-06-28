@@ -15,7 +15,7 @@ namespace ReactiveUI.Tests.Winforms
             WinFormsViewModelViewHost.DefaultCacheViewsEnabled = true;
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void SettingViewModelShouldAddTheViewtoItsControls()
         {
             var viewLocator = new FakeViewLocator { LocatorFunc = t => new FakeWinformsView() };
@@ -28,7 +28,7 @@ namespace ReactiveUI.Tests.Winforms
             Assert.Equal(1, target.Controls.OfType<FakeWinformsView>().Count());
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void ShouldDisposePreviousView()
         {
             var viewLocator = new FakeViewLocator { LocatorFunc = t => new FakeWinformsView()};
@@ -50,7 +50,7 @@ namespace ReactiveUI.Tests.Winforms
             Assert.True(isDisposed);
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void ShouldSetDefaultContentWhenViewModelIsNull()
         {
             var viewLocator = new FakeViewLocator { LocatorFunc = t => new FakeWinformsView() };
@@ -61,7 +61,7 @@ namespace ReactiveUI.Tests.Winforms
             Assert.True(target.Controls.Contains(defaultContent));
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void ShouldCacheViewWhenEnabled()
         {
             var viewLocator = new FakeViewLocator { LocatorFunc = t => new FakeWinformsView() };
@@ -74,7 +74,7 @@ namespace ReactiveUI.Tests.Winforms
             Assert.True(object.ReferenceEquals(cachedView, target.Content));
         }
 
-        [Fact(Skip ="Skipped to diagnose xunit/threading/scheduling issue")]
+        [Fact]
         public void ShouldNotCacheViewWhenDisabled()
         {
             var viewLocator = new FakeViewLocator { LocatorFunc = t => new FakeWinformsView() };
